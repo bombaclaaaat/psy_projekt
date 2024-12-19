@@ -1,0 +1,103 @@
+-- Tabele i dane przykładowe dla aplikacji zarządzającej wystawami psów
+
+1. **Tabela: Użytkownik (Users)**
+   - Pola:
+     - `id`: Klucz główny, numer identyfikacyjny
+     - `imie`: Imię użytkownika
+     - `nazwisko`: Nazwisko użytkownika
+     - `email`: Unikalny adres email
+     - `haslo`: Zaszyfrowane hasło
+     - `rola`: Rola w aplikacji (`administrator`, `klient`, `pracownik`)
+   - Przykładowe rekordy:
+     - Jan Kowalski, jan.kowalski@example.com, administrator
+     - Anna Nowak, anna.nowak@example.com, klient
+     - Piotr Wiśniewski, piotr.wisniewski@example.com, pracownik
+
+2. **Tabela: Wystawa (Dog Shows)**
+   - Pola:
+     - `id`: Klucz główny
+     - `nazwa`: Nazwa wystawy
+     - `data`: Data wydarzenia
+     - `lokalizacja`: Lokalizacja
+   - Przykładowe rekordy:
+     - Międzynarodowa Wystawa Psów, 2024-06-15, Warszawa
+     - Krajowa Wystawa Psów, 2024-09-10, Kraków
+
+3. **Tabela: Pies (Dogs)**
+   - Pola:
+     - `id`: Klucz główny
+     - `imie`: Imię psa
+     - `rasa`: Rasa psa
+     - `wiek`: Wiek w latach
+     - `id_użytkownika`: Powiązanie z właścicielem
+   - Przykładowe rekordy:
+     - Reksio, Labrador Retriever, 5 lat, właściciel: Anna Nowak
+     - Bella, German Shepherd, 3 lata, właściciel: Anna Nowak
+
+4. **Tabela: Zgłoszenie (Applications)**
+   - Pola:
+     - `id`: Klucz główny
+     - `id_pies`: Powiązanie z psem
+     - `id_wystawa`: Powiązanie z wystawą
+     - `status`: Status zgłoszenia (`zatwierdzony`, `oczekujący`, `odrzucony`)
+   - Przykładowe rekordy:
+     - Reksio zgłoszony na Międzynarodową Wystawę Psów, status: zatwierdzony
+     - Bella zgłoszona na Krajową Wystawę Psów, status: oczekujący
+
+5. **Tabela: Oceny (Evaluations)**
+   - Pola:
+     - `id`: Klucz główny
+     - `id_zgłoszenie`: Powiązanie ze zgłoszeniem
+     - `ocena`: Ocena (1-10)
+     - `komentarz`: Opinia sędziego
+   - Przykładowe rekordy:
+     - Reksio, ocena: 9, komentarz: "Doskonały wygląd i zachowanie"
+
+6. **Tabela: Rola (Roles and Permissions)**
+   - Pola:
+     - `id`: Klucz główny
+     - `nazwa`: Nazwa roli
+     - `opis`: Opis uprawnień
+   - Przykładowe rekordy:
+     - Administrator: Pełny dostęp do systemu
+     - Klient: Dostęp do zgłoszeń i przeglądania wystaw
+     - Pracownik: Obsługa zgłoszeń i zarządzanie wystawami
+
+7. **Tabela: Logi Aktywności (Activity Logs)**
+   - Pola:
+     - `id`: Klucz główny
+     - `id_użytkownik`: Powiązanie z użytkownikiem
+     - `akcja`: Opis akcji
+     - `data`: Data i czas akcji
+   - Przykładowe rekordy:
+     - Jan Kowalski: "Utworzenie wystawy"
+     - Piotr Wiśniewski: "Zatwierdzenie zgłoszenia"
+
+8. **Tabela: Harmonogram (Schedule)**
+   - Pola:
+     - `id`: Klucz główny
+     - `id_wystawa`: Powiązanie z wystawą
+     - `czas`: Godzina wydarzenia
+     - `wydarzenie`: Opis wydarzenia
+   - Przykładowe rekordy:
+     - Rejestracja: 10:00
+     - Pokazy finalistów: 12:00
+
+9. **Tabela: Nagrody (Prizes)**
+   - Pola:
+     - `id`: Klucz główny
+     - `nazwa`: Nazwa nagrody
+     - `opis`: Opis nagrody
+     - `id_wystawa`: Powiązanie z wystawą
+   - Przykładowe rekordy:
+     - Puchar Zwycięzcy: Nagroda główna za najlepszego psa wystawy
+
+10. **Tabela: Wiadomości (Messages)**
+    - Pola:
+      - `id`: Klucz główny
+      - `id_użytkownik`: Powiązanie z użytkownikiem
+      - `tytuł`: Tytuł wiadomości
+      - `treść`: Treść wiadomości
+      - `data`: Data i czas wysłania
+    - Przykładowe rekordy:
+      - Anna Nowak: "Informacje o wystawie", "Proszę o więcej informacji na temat wystawy w Warszawie."
