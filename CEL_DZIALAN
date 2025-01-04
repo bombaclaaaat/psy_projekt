@@ -1,103 +1,132 @@
--- Tabele i dane przykładowe dla aplikacji zarządzającej wystawami psów
+Tabela: Użytkownicy (uzytkownicy)
+Pola:
+id: Unikalny identyfikator użytkownika.
+imie: Imię użytkownika.
+nazwisko: Nazwisko użytkownika.
+email: Unikalny adres e-mail użytkownika.
+haslo: Zaszyfrowane hasło.
+rola: Rola użytkownika (administrator, klient, pracownik).
+data_utworzenia: Data utworzenia konta.
+data_aktualizacji: Data ostatniej modyfikacji konta.
+Przykładowe rekordy:
+Jan Kowalski, jan.kowalski@example.com, administrator
+Anna Nowak, anna.nowak@example.com, klient
+Piotr Wiśniewski, piotr.wisniewski@example.com, pracownik
 
-1. **Tabela: Użytkownik (Users)**
-   - Pola:
-     - `id`: Klucz główny, numer identyfikacyjny
-     - `imie`: Imię użytkownika
-     - `nazwisko`: Nazwisko użytkownika
-     - `email`: Unikalny adres email
-     - `haslo`: Zaszyfrowane hasło
-     - `rola`: Rola w aplikacji (`administrator`, `klient`, `pracownik`)
-   - Przykładowe rekordy:
-     - Jan Kowalski, jan.kowalski@example.com, administrator
-     - Anna Nowak, anna.nowak@example.com, klient
-     - Piotr Wiśniewski, piotr.wisniewski@example.com, pracownik
+Tabela: Psy (psy)
+Pola:
+id: Unikalny identyfikator psa.
+imie: Imię psa.
+rasa: Rasa psa.
+wiek: Wiek psa w latach.
+kolor: Kolor psa.
+plec: Płeć psa.
+właściciel_id: Klucz obcy do tabeli uzytkownicy, wskazujący właściciela psa.
+opis: Opis psa (np. cechy charakterystyczne).
+data_utworzenia: Data dodania psa do systemu.
+Przykładowe rekordy:
+Reksio, Labrador Retriever, 5 lat, brązowy, samiec, właściciel: Anna Nowak
+Bella, German Shepherd, 3 lata, czarny, samica, właściciel: Piotr Wiśniewski
 
-2. **Tabela: Wystawa (Dog Shows)**
-   - Pola:
-     - `id`: Klucz główny
-     - `nazwa`: Nazwa wystawy
-     - `data`: Data wydarzenia
-     - `lokalizacja`: Lokalizacja
-   - Przykładowe rekordy:
-     - Międzynarodowa Wystawa Psów, 2024-06-15, Warszawa
-     - Krajowa Wystawa Psów, 2024-09-10, Kraków
+Tabela: Wystawy (wystawy)
+Pola:
+id: Unikalny identyfikator wystawy.
+nazwa: Nazwa wystawy.
+data_rozpoczecia: Data rozpoczęcia wystawy.
+data_zakonczenia: Data zakończenia wystawy.
+miejsce: Miejsce wystawy.
+opis: Opis wystawy.
+data_utworzenia: Data dodania wystawy.
+Przykładowe rekordy:
+Międzynarodowa Wystawa Psów, 2024-06-15, Warszawa, Wystawa psów różnych ras.
+Krajowa Wystawa Psów, 2024-09-10, Kraków, Tylko psy rodzimych ras.
 
-3. **Tabela: Pies (Dogs)**
-   - Pola:
-     - `id`: Klucz główny
-     - `imie`: Imię psa
-     - `rasa`: Rasa psa
-     - `wiek`: Wiek w latach
-     - `id_użytkownika`: Powiązanie z właścicielem
-   - Przykładowe rekordy:
-     - Reksio, Labrador Retriever, 5 lat, właściciel: Anna Nowak
-     - Bella, German Shepherd, 3 lata, właściciel: Anna Nowak
+Tabela: Kategorie (kategorie)
+Pola:
+id: Unikalny identyfikator kategorii.
+nazwa: Nazwa kategorii (np. "Labrador Retriever", "Owczarek Niemiecki").
+opis: Opis kategorii.
+Przykładowe rekordy:
+Labrador Retriever, Kategoria dla psów tej rasy.
+Owczarek Niemiecki, Kategoria dla psów tej rasy.
 
-4. **Tabela: Zgłoszenie (Applications)**
-   - Pola:
-     - `id`: Klucz główny
-     - `id_pies`: Powiązanie z psem
-     - `id_wystawa`: Powiązanie z wystawą
-     - `status`: Status zgłoszenia (`zatwierdzony`, `oczekujący`, `odrzucony`)
-   - Przykładowe rekordy:
-     - Reksio zgłoszony na Międzynarodową Wystawę Psów, status: zatwierdzony
-     - Bella zgłoszona na Krajową Wystawę Psów, status: oczekujący
+Tabela: Oceny (oceny)
+Pola:
+id: Unikalny identyfikator oceny.
+id_zgloszenie: Klucz obcy do tabeli zgloszenia, wskazujący zgłoszenie psa.
+ocena: Ocena (np. w skali 1-10).
+komentarze: Uwagi sędziego.
+data_oceny: Data oceny.
+Przykładowe rekordy:
+Reksio, ocena: 9, komentarz: "Doskonały wygląd i zachowanie."
+Bella, ocena: 8, komentarz: "Piękna sierść, ale nieco zbyt nerwowa."
 
-5. **Tabela: Oceny (Evaluations)**
-   - Pola:
-     - `id`: Klucz główny
-     - `id_zgłoszenie`: Powiązanie ze zgłoszeniem
-     - `ocena`: Ocena (1-10)
-     - `komentarz`: Opinia sędziego
-   - Przykładowe rekordy:
-     - Reksio, ocena: 9, komentarz: "Doskonały wygląd i zachowanie"
+Tabela: Bilety (bilety)
+Pola:
+id: Unikalny identyfikator biletu.
+klient_id: Klucz obcy do tabeli uzytkownicy, wskazujący klienta, który zakupił bilet.
+wystawa_id: Klucz obcy do tabeli wystawy, wskazujący wystawę.
+rodzaj_biletu: Rodzaj biletu (np. "normalny", "ulgowy").
+cena: Cena biletu.
+data_zakupu: Data zakupu biletu.
+Przykładowe rekordy:
+Normalny bilet, cena: 50 zł, wystawa: Międzynarodowa Wystawa Psów, klient: Anna Nowak
+Ulgowy bilet, cena: 30 zł, wystawa: Krajowa Wystawa Psów, klient: Piotr Wiśniewski
 
-6. **Tabela: Rola (Roles and Permissions)**
-   - Pola:
-     - `id`: Klucz główny
-     - `nazwa`: Nazwa roli
-     - `opis`: Opis uprawnień
-   - Przykładowe rekordy:
-     - Administrator: Pełny dostęp do systemu
-     - Klient: Dostęp do zgłoszeń i przeglądania wystaw
-     - Pracownik: Obsługa zgłoszeń i zarządzanie wystawami
+Tabela: Zamówienia (zamowienia)
+Pola:
+id: Unikalny identyfikator zamówienia.
+klient_id: Klucz obcy do tabeli uzytkownicy, wskazujący klienta.
+data_zamowienia: Data złożenia zamówienia.
+cena_calkowita: Całkowita cena zamówienia.
+status: Status zamówienia (np. "oczekujące", "zrealizowane").
+status_platnosci: Status płatności (np. "oczekująca", "zapłacona").
+Przykładowe rekordy:
+Anna Nowak, 2024-06-01, cena całkowita: 50 zł, status: zrealizowane, status płatności: zapłacona
+Piotr Wiśniewski, 2024-06-02, cena całkowita: 60 zł, status: oczekujące, status płatności: oczekująca
 
-7. **Tabela: Logi Aktywności (Activity Logs)**
-   - Pola:
-     - `id`: Klucz główny
-     - `id_użytkownik`: Powiązanie z użytkownikiem
-     - `akcja`: Opis akcji
-     - `data`: Data i czas akcji
-   - Przykładowe rekordy:
-     - Jan Kowalski: "Utworzenie wystawy"
-     - Piotr Wiśniewski: "Zatwierdzenie zgłoszenia"
+Tabela: Szczegóły Zamówienia (szczegoly_zamowienia)
+Pola:
+id: Unikalny identyfikator szczegółu zamówienia.
+zamowienie_id: Klucz obcy do tabeli zamowienia.
+bilet_id: Klucz obcy do tabeli bilety.
+ilosc: Liczba zakupionych biletów.
+cena: Cena jednostkowa biletu.
+cena_calkowita: Całkowita cena za ten szczegół zamówienia.
+Przykładowe rekordy:
+Bilet normalny, ilość: 1, cena jednostkowa: 50 zł, cena całkowita: 50 zł
+Bilet ulgowy, ilość: 2, cena jednostkowa: 30 zł, cena całkowita: 60 zł
 
-8. **Tabela: Harmonogram (Schedule)**
-   - Pola:
-     - `id`: Klucz główny
-     - `id_wystawa`: Powiązanie z wystawą
-     - `czas`: Godzina wydarzenia
-     - `wydarzenie`: Opis wydarzenia
-   - Przykładowe rekordy:
-     - Rejestracja: 10:00
-     - Pokazy finalistów: 12:00
+Tabela: Pracownicy (pracownicy)
+Pola:
+id: Unikalny identyfikator pracownika.
+uzytkownik_id: Klucz obcy do tabeli uzytkownicy, wskazujący pracownika.
+rola: Rola pracownika (np. "rejestracja", "obsługa klienta").
+data_zatrudnienia: Data zatrudnienia pracownika.
+Przykładowe rekordy:
+Piotr Wiśniewski, rola: rejestracja, zatrudniony: 2023-05-01
 
-9. **Tabela: Nagrody (Prizes)**
-   - Pola:
-     - `id`: Klucz główny
-     - `nazwa`: Nazwa nagrody
-     - `opis`: Opis nagrody
-     - `id_wystawa`: Powiązanie z wystawą
-   - Przykładowe rekordy:
-     - Puchar Zwycięzcy: Nagroda główna za najlepszego psa wystawy
 
-10. **Tabela: Wiadomości (Messages)**
-    - Pola:
-      - `id`: Klucz główny
-      - `id_użytkownik`: Powiązanie z użytkownikiem
-      - `tytuł`: Tytuł wiadomości
-      - `treść`: Treść wiadomości
-      - `data`: Data i czas wysłania
-    - Przykładowe rekordy:
-      - Anna Nowak: "Informacje o wystawie", "Proszę o więcej informacji na temat wystawy w Warszawie."
+Tabela: Logi (logi)
+Pola:
+id: Unikalny identyfikator logu.
+uzytkownik_id: Klucz obcy do tabeli uzytkownicy, wskazujący użytkownika, który wykonał akcję.
+akcja: Opis wykonanej akcji (np. "zakupiono bilet", "zarejestrowano psa").
+data_akcji: Data wykonania akcji.
+Przykładowe rekordy:
+Jan Kowalski: "Utworzenie wystawy", 2024-06-01
+Piotr Wiśniewski: "Zatwierdzenie zgłoszenia", 2024-06-02
+
+Tabela: Metody Płatności (metody_platnosci)
+Pola:
+id: Unikalny identyfikator metody płatności.
+nazwa: Nazwa metody płatności (np. "Karta kredytowa", "PayPal").
+opis: Opis metody płatności.
+
+Tabela: Sponsorzy (sponsorzy)
+Pola:
+id: Unikalny identyfikator sponsora.
+nazwa: Nazwa sponsora.
+dane_kontaktowe: Dane kontaktowe sponsora.
+wniosek: Wysokość wkładu finansowego sponsora.
+data_utworzenia: Data dodania sponsora.
